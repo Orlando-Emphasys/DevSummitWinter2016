@@ -21,5 +21,9 @@ namespace QRScanner_API.DAL
 
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Owner> Owners { get; set; }
+        public DbSet<Office> Offices { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<ItemQR> ItemQRs { get; set; }
     }
 }
