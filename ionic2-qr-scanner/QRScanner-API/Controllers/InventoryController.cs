@@ -79,30 +79,33 @@ namespace QRScanner_API.Controllers
             return false;
         }
 
-        [HttpGet("{city}")]
+        [HttpGet("ListModels")]
         //Will need to redo when the view models are changed
-        public List<NewItemViewModel> ListModels(string city, int limit)
+        public List<NewItemViewModel> ListModels()
         {
             var list = new List<NewItemViewModel>();
-            var office = _context.Offices.SingleOrDefault(x=>x.City == city);
-            var products = _context.Products.Where(x => x.OfficeId == office.ID);
+            //var office = _context.Offices.SingleOrDefault(x=>x.City == city);
+            var products = _context.Products.ToList();
             foreach (var product in products)
             {
-                var item = _context.ItemQRs.SingleOrDefault(x => x.ProductID == product.ID);
-                var owner = _context.Owners.SingleOrDefault(x => x.ID == item.OwnerID);
-                var location = _context.Locations.SingleOrDefault(x=>x.ID == owner.LocationID);
-
-                var newitem = new NewItemViewModel
+                var items = _context.ItemQRs.Where(x => x.ProductID == product.ID);
+                foreach (var item in items)
                 {
-                    brand = product.Brand,
-                    city = office.City,
-                    model = product.Model,
-                    serialnumber = item.SerialNumber,
-                    ownername = owner.Name,
-                    location = location.Description,
-                    type = product.Type
-                };
-                list.Add(newitem);
+                    var owner = _context.Owners.SingleOrDefault(x => x.ID == item.OwnerID);
+                    var location = _context.Locations.SingleOrDefault(x => x.ID == owner.LocationID);
+                    var office = _context.Offices.SingleOrDefault(x => x.ID == product.OfficeId);
+                    var newitem = new NewItemViewModel
+                    {
+                        brand = product.Brand,
+                        city = office.City,
+                        model = product.Model,
+                        serialnumber = item.SerialNumber,
+                        ownername = owner.Name,
+                        location = location.Description,
+                        type = product.Type
+                    };
+                    list.Add(newitem);
+                }
             }
             return list;
         }
