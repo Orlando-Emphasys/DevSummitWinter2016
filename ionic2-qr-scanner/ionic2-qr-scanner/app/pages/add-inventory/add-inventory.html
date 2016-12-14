@@ -1,0 +1,58 @@
+﻿<ion-header class="header">
+    <ion-navbar>
+        <ion-title>Add Item</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="content addInventory">
+    <ion-list>
+        <ion-item>
+            <ion-label stacked class="label">Type:</ion-label>
+            <ion-select>
+                <ion-option value="Furniture">Furniture</ion-option>
+                <ion-option value="Desktop">Desktop</ion-option>
+                <ion-option value="Laptop">Laptop</ion-option>
+                <ion-option value="Printer">Printer</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Brand:</ion-label>
+            <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Model:</ion-label>
+            <ion-input></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Office:</ion-label>
+            <ion-select>
+                <ion-option value="Miami">Miami</ion-option>
+                <ion-option value="Petoskey">Petoskey</ion-option>
+                <ion-option value="Emeryville">Emeryville</ion-option>
+                <ion-option value="PrinterMarkham">Markham</ion-option>
+                <ion-option value="Palma de Mallorca">Palma de Mallorca</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Location:</ion-label>
+            <ion-input></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Owner's name:</ion-label>
+            <ion-input></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Serial number:</ion-label>
+            <ion-input></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <br />
+    <br />
+    <ion-row style="justify-content:center;">
+        <button id="btnAddInventory" (click)="addItem()">Add to inventory</button>
+    </ion-row>
+</ion-content>

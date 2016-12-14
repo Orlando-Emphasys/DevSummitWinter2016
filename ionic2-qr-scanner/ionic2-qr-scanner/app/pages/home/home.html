@@ -1,50 +1,61 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-    </ion-title>
-  </ion-navbar>
+<ion-header class="header">
+    <ion-navbar>
+        <ion-title>Inventory List</ion-title>
+        <ion-buttons end>
+            <button id="addButton" (click)="addInventory()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
-<ion-content class="home" padding>
-
-    <h2 class="center">Ionic Blank Starter</h2> 
-
-    <div class="center">
-        <p class="ionic-logo"></p>
-    </div>
-
-    <ion-card>
-        <ion-card-header>
-            Docs are here to help
-        </ion-card-header>
-
-        <ion-list>
-            <button ion-item (click)="onLink('http://go.microsoft.com/fwlink/?LinkID=820516')">
-                <ion-icon name="jet" item-left></ion-icon>
-                Getting Started
-            </button>
-
-            <button ion-item (click)="onLink('http://go.microsoft.com/fwlink/?LinkID=820761')">
-                <ion-icon name="ionic" item-left></ion-icon>
-                Ionic Framework
-            </button>
-
-            <button ion-item (click)="onLink('http://go.microsoft.com/fwlink/?LinkID=820520')">
-                <ion-icon name="thunderstorm" item-left></ion-icon>
-                Azure Services
-            </button>
-
-            <button ion-item (click)="onLink('http://go.microsoft.com/fwlink/?LinkID=820524')">
-                <ion-icon name="cafe" item-left></ion-icon>
-                Plugins Support
-            </button>
-
-            <button ion-item (click)="onLink('http://go.microsoft.com/fwlink/?LinkID=820526')">
-                <ion-icon name="paw" item-left></ion-icon>
-                Troubleshooting
-            </button>
-        </ion-list>
-        
-    </ion-card>
-
+<ion-content class="content home">
+    <ion-list>
+        <ion-item>
+            <ion-select id="searchInventory" placeholder="Filter by location">
+                <ion-option value="Miami">Miami</ion-option>
+                <ion-option value="Petoskey">Petoskey</ion-option>
+                <ion-option value="Emeryville">Emeryville</ion-option>
+                <ion-option value="PrinterMarkham">Markham</ion-option>
+                <ion-option value="Palma de Mallorca">Palma de Mallorca</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngFor="let item of itemList">
+            <ion-row>
+                <ion-col width-40>
+                    <label style="color:black;font-weight:bold;">Type: </label>
+                    <label>{{item.type}}</label>
+                </ion-col>
+                <ion-col width-60>
+                    <label style="color:black;font-weight:bold;">Brand: </label>
+                    <label>{{item.brand}}</label>
+                </ion-col>
+                
+            </ion-row>
+            <ion-row>
+                <ion-col width-30>
+                    <label style="color:black;font-weight:bold;">Model: </label>
+                    <label>{{item.model}}</label>
+                </ion-col>  
+            </ion-row>
+            <ion-row>
+                <ion-col width-100>
+                    <label style="color:black;font-weight:bold;">Office: </label>
+                    <label>{{item.officename}}</label>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-100>
+                    <label style="color:black;font-weight:bold;">Serial number: </label>
+                    <label>{{item.serialNum}}</label>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
 </ion-content>
+
+<ion-footer class="footer">
+    <ion-row style="justify-content:center;">
+        <button id="btnScan" (click)="scan()">Scan item</button>
+    </ion-row>
+</ion-footer>

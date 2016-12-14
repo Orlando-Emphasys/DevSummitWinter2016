@@ -1,0 +1,32 @@
+﻿@import "./app.variables.scss";
+
+ion-label {
+    color: $white !important;  
+}
+
+.content {
+    background-color: $background;
+}
+
+.item {
+    background-color: $background;
+}
+
+.header {
+    .back-button {
+        color: $white;
+    }
+
+    #addButton {
+        background-color: $addButton;
+        width: 34px;
+    }
+
+    .toolbar-title {
+        color: $white;
+    }
+
+    .toolbar-background {
+        background-color: $headerBackground;
+    }
+}

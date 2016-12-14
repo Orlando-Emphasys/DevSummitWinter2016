@@ -7,24 +7,16 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "io.cordova.myappd94927"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.cordova.myappd94927"
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "io.cordova.myapp08ad2d"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "io.cordova.myappd94927"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "io.cordova.myappd94927"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.myappd94927"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "io.cordova.myappd94927"
+            "PACKAGE_NAME": "io.cordova.myapp08ad2d"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.cordova.myapp08ad2d"
+        }
+    }
 }

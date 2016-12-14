@@ -1,0 +1,49 @@
+﻿<ion-header class="header">
+    <ion-navbar>
+        <ion-title>Item Details</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="content details">
+    <ion-list>
+        <ion-item>
+            <ion-label stacked class="label">Type:</ion-label>
+            <ion-input readonly value="{{retrievedItem.type}}"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Brand:</ion-label>
+            <ion-input readonly value="{{retrievedItem.brand}}"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Model:</ion-label>
+            <ion-input readonly value="{{retrievedItem.model}}"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Quantity:</ion-label>
+            <ion-input readonly value="{{retrievedItem.quantity}}"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Office</ion-label>
+            <ion-input readonly value="{{retrievedItem.officename}}"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Location</ion-label>
+
+            <ion-input readonly value="{{retrievedItem.location}}"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Owner's name</ion-label>
+            <ion-input readonly value="{{retrievedItem.ownername}}"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="label">Serial number</ion-label>
+            <ion-input readonly value="{{retrievedItem.serialNum}}"></ion-input>
+
+        </ion-item>
+    </ion-list>
+</ion-content>
