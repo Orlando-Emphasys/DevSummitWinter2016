@@ -25,11 +25,18 @@
 // Both iOS and MD colors can be further customized if colors
 // are different per mode.
 
+$background: #597aaf;
+$headerBackground: #444444;
+$lightButton: #999999;
+$darkButton: rgb(34, 67, 117);
+$white: #FFFFFF;
+$addButton: #54c244;
+
 $colors: (
-  primary:    #387ef5,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  favorite:   #69BB7B
+    primary:    #387ef5,
+    secondary:  #32db64,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       #222,
+    favorite:   #69BB7B
 );

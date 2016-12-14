@@ -1,5 +1,20 @@
-.home {
-      .center {
+@import "../../theme/app.variables.scss";
+
+.footer {
+    #btnScan {
+        background-color: $darkButton;
+        color: #FFFFFF; 
+        margin-bottom: 30px;
+    }
+}
+
+.home {    
+    #searchInventory {
+        background-color: #FFFFFF;
+        float:right;
+    }
+
+    .center {
         text-align: center;  
     }
     
