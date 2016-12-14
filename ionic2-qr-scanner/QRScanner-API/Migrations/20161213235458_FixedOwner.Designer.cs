@@ -8,9 +8,10 @@ using QRScanner_API.DAL;
 namespace QRScannerAPI.Migrations
 {
     [DbContext(typeof(APIDataContext))]
-    partial class APIDataContextModelSnapshot : ModelSnapshot
+    [Migration("20161213235458_FixedOwner")]
+    partial class FixedOwner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.2")

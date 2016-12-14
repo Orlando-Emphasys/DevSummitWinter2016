@@ -8,7 +8,7 @@ namespace QRScanner_API.Models
     public class Owner
     {
         public int ID { get; set; }
-        public int Name { get; set; }
+        public String Name { get; set; }
 
         public int LocationID { get; set; }
 

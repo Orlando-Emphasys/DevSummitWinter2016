@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace QRScanner_API.Controllers
 {
+    [Route("api/[controller]")]
     public class InventoryController: Controller
     {
         private APIDataContext _context;
@@ -78,6 +79,69 @@ namespace QRScanner_API.Controllers
             return false;
         }
 
+        [HttpGet("{city}")]
+        //Will need to redo when the view models are changed
+        public List<NewItemViewModel> ListModels(string city, int limit)
+        {
+            var list = new List<NewItemViewModel>();
+            var office = _context.Offices.SingleOrDefault(x=>x.City == city);
+            var products = _context.Products.Where(x => x.OfficeId == office.ID);
+            foreach (var product in products)
+            {
+                var item = _context.ItemQRs.SingleOrDefault(x => x.ProductID == product.ID);
+                var owner = _context.Owners.SingleOrDefault(x => x.ID == item.OwnerID);
+                var location = _context.Locations.SingleOrDefault(x=>x.ID == owner.LocationID);
 
+                var newitem = new NewItemViewModel
+                {
+                    brand = product.Brand,
+                    city = office.City,
+                    model = product.Model,
+                    serialnumber = item.SerialNumber,
+                    ownername = owner.Name,
+                    location = location.Description,
+                    type = product.Type
+                };
+                list.Add(newitem);
+            }
+            return list;
+        }
+
+        // similar to the method above, will need to test
+        public List<NewItemViewModel> FilteredList(string search, string city, int limit)
+        {
+            var list = new List<NewItemViewModel>();
+            var office = _context.Offices.SingleOrDefault(x => x.City == city);
+            var products = _context.Products.Where(x => x.OfficeId == office.ID &&  
+                                                    (x.Model.Contains(search) ||
+                                                     x.Type.Contains(search)));
+
+            foreach (var product in products)
+            {
+                var item = _context.ItemQRs.SingleOrDefault(x => x.ProductID == product.ID);
+                var owner = _context.Owners.SingleOrDefault(x => x.ID == item.OwnerID);
+                var location = _context.Locations.SingleOrDefault(x => x.ID == owner.LocationID);
+
+                var newitem = new NewItemViewModel
+                {
+                    brand = product.Brand,
+                    city = office.City,
+                    model = product.Model,
+                    serialnumber = item.SerialNumber,
+                    ownername = owner.Name,
+                    location = location.Description,
+                    type = product.Type
+                };
+                list.Add(newitem);
+            }
+            return list;
+        }
+
+        [HttpGet("{itemID}")]
+        //still need to figure out what data is being sent back
+        public ItemQR GenerateQR(int itemID)
+        {
+            return _context.ItemQRs.SingleOrDefault(x=>x.ID == itemID);
+        }
     }
 }
