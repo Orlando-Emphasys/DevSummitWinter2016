@@ -19,7 +19,6 @@ namespace QRScanner_API.Controllers
         }
         public IActionResult Get(int id)
         {
-
             ItemQR item = _context.ItemQRs.First(x => x.ID == id);
             Product returnVal = _context.Products.First(x => x.ID == item.ProductID);
             String returnOffice = _context.Offices.First(x => x.ID == returnVal.OfficeId).Description;
