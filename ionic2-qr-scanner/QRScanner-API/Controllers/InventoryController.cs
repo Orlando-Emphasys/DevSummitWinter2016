@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QRScanner_API.DAL;
+using QRScanner_API.Helper;
 using QRScanner_API.Models;
 using QRScanner_API.ViewModels;
 using System;
@@ -10,13 +11,15 @@ using System.Threading.Tasks;
 namespace QRScanner_API.Controllers
 {
     [Route("api/[controller]")]
-    public class InventoryController: Controller
+    public class InventoryController : Controller
     {
         private APIDataContext _context;
-        public InventoryController (APIDataContext api)
+        public InventoryController(APIDataContext api)
         {
             _context = api;
         }
+        [HttpGet("{id}", Name = "Get")]
+
         public IActionResult Get(int id)
         {
 
@@ -26,14 +29,15 @@ namespace QRScanner_API.Controllers
             Owner returnOwner = _context.Owners.First(x => x.ID == item.OwnerID);
             Location loc = _context.Locations.First(x => x.ID == returnOwner.LocationID);
 
-            return Json (new { Brand = returnVal.Brand,
-                               Type = returnVal.Type,
-                               Quantity = returnVal.Quantity,
-                               Model = returnVal.Model,
-                               Office = returnOffice,
-                               Owner = returnOwner.Name,
-                               Location = loc.Description});
+            return Json(new { Brand = returnVal.Brand,
+                Type = returnVal.Type,
+                Quantity = returnVal.Quantity,
+                Model = returnVal.Model,
+                Office = returnOffice,
+                Owner = returnOwner.Name,
+                Location = loc.Description });
         }
+        [HttpPost(Name = "Post")]
 
         public IActionResult Post([FromBody]NewItemViewModel NewItem)
         {
@@ -42,7 +46,7 @@ namespace QRScanner_API.Controllers
 
             //Increase quantity or create a new product
             var checkInv = _context.Products.FirstOrDefault(x => x.Brand == NewItem.brand && x.Model == NewItem.model && x.Type == NewItem.type);
-            if(checkInv != null)
+            if (checkInv != null)
             {
                 checkInv.Quantity++;
                 _context.SaveChanges();
@@ -73,6 +77,7 @@ namespace QRScanner_API.Controllers
 
             return Json(new { Success = returnVal, itemID = returnID });
         }
+        [HttpPost(Name = "Add")]
 
         public bool Add(Product AddItem)
         {
@@ -110,32 +115,39 @@ namespace QRScanner_API.Controllers
             return list;
         }
 
+        [HttpGet("{city}", Name = "FilteredList")]
+        [Route("FilteredList/{city}")]
         // similar to the method above, will need to test
-        public List<NewItemViewModel> FilteredList(string search, string city, int limit)
+        public List<NewItemViewModel> FilteredList(string city)//, string search)
         {
             var list = new List<NewItemViewModel>();
             var office = _context.Offices.SingleOrDefault(x => x.City == city);
-            var products = _context.Products.Where(x => x.OfficeId == office.ID &&  
-                                                    (x.Model.Contains(search) ||
-                                                     x.Type.Contains(search)));
+            var products = _context.Products.Where(x => x.OfficeId == office.ID);
+            //&&  
+            //                                        (x.Model.CaseInsensitiveContains(search) ||
+            //                                         x.Type.CaseInsensitiveContains(search)));
 
             foreach (var product in products)
             {
-                var item = _context.ItemQRs.SingleOrDefault(x => x.ProductID == product.ID);
-                var owner = _context.Owners.SingleOrDefault(x => x.ID == item.OwnerID);
-                var location = _context.Locations.SingleOrDefault(x => x.ID == owner.LocationID);
-
-                var newitem = new NewItemViewModel
+                var items = _context.ItemQRs.Where(x => x.ProductID == product.ID);
+                foreach (var item in items)
                 {
-                    brand = product.Brand,
-                    city = office.City,
-                    model = product.Model,
-                    serialnumber = item.SerialNumber,
-                    ownername = owner.Name,
-                    location = location.Description,
-                    type = product.Type
-                };
-                list.Add(newitem);
+                    var owner = _context.Owners.SingleOrDefault(x => x.ID == item.OwnerID);
+                    var location = _context.Locations.SingleOrDefault(x => x.ID == owner.LocationID);
+
+                    var newitem = new NewItemViewModel
+                    {
+                        brand = product.Brand,
+                        city = office.City,
+                        model = product.Model,
+                        serialnumber = item.SerialNumber,
+                        ownername = owner.Name,
+                        location = location.Description,
+                        type = product.Type
+                    };
+                    list.Add(newitem);
+                }
+                
             }
             return list;
         }
