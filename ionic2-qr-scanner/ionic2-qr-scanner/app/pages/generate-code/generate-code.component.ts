@@ -14,18 +14,6 @@ export class GenerateCode {
         this.pages = [HomePage];
     }
 
-    //ngOnInit() {
-    //    //Generate QR Code here
-    //    this.http.get("https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=WeDidIt").subscribe(
-    //        response => {
-    //            console.log(response);
-    //        },
-    //        err => {
-    //            console.log('Error: ' + err);   
-    //        }
-    //    )
-    //}
-
     return() {
         this.nav.push(this.pages[0]);
     }

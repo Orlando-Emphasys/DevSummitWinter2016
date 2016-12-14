@@ -10,8 +10,8 @@
 </ion-header>
 
 <ion-content class="content home">
-    <ion-row>
-        <ion-card>
+    <ion-list>
+        <ion-item>
             <ion-select id="searchInventory" placeholder="Filter by location">
                 <ion-option value="Miami">Miami</ion-option>
                 <ion-option value="Petoskey">Petoskey</ion-option>
@@ -19,13 +19,39 @@
                 <ion-option value="PrinterMarkham">Markham</ion-option>
                 <ion-option value="Palma de Mallorca">Palma de Mallorca</ion-option>
             </ion-select>
-            <ion-list>
-                <ion-card *ngFor="let item of itemList">
-                    <h2>{{item.name}}</h2>
-                </ion-card>
-            </ion-list>
-        </ion-card>
-    </ion-row>
+        </ion-item>
+        <ion-item *ngFor="let item of itemList">
+            <ion-row>
+                <ion-col width-40>
+                    <label style="color:black;font-weight:bold;">Type: </label>
+                    <label>{{item.type}}</label>
+                </ion-col>
+                <ion-col width-60>
+                    <label style="color:black;font-weight:bold;">Brand: </label>
+                    <label>{{item.brand}}</label>
+                </ion-col>
+                
+            </ion-row>
+            <ion-row>
+                <ion-col width-30>
+                    <label style="color:black;font-weight:bold;">Model: </label>
+                    <label>{{item.model}}</label>
+                </ion-col>  
+            </ion-row>
+            <ion-row>
+                <ion-col width-100>
+                    <label style="color:black;font-weight:bold;">Office: </label>
+                    <label>{{item.officename}}</label>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-100>
+                    <label style="color:black;font-weight:bold;">Serial number: </label>
+                    <label>{{item.serialNum}}</label>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
 </ion-content>
 
 <ion-footer class="footer">
